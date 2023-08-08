@@ -74,7 +74,7 @@ namespace SearchAndMatch.Api.Controllers
 
         [Route("CreateSearch")]
         [HttpPost]
-        public async Task<ActionResult<Patient>> CreateSearch([FromBody] SearchCreateRequest search)
+        public async Task<ActionResult<EndpointResponse>> CreateSearch([FromBody] SearchCreateRequest search)
         {
             if (_patientService == null)
             {
@@ -95,6 +95,7 @@ namespace SearchAndMatch.Api.Controllers
 
             dynamic matchEngine = JsonConvert.DeserializeObject(engine.Schema);
 
+            var result = new EndpointResponse();
             var eng1 = JsonConvert.DeserializeObject<EngineRequest1>(engine.Schema);
             if (eng1.Patient.Forename != null)
             {
@@ -102,7 +103,7 @@ namespace SearchAndMatch.Api.Controllers
                 eng1.Patient.Surname = patient.LastName;
                 eng1.Patient.DateOfBirth = Convert.ToDateTime(patient.DateOfBirth).ToString("yyyy-MM-dd");
                 eng1.Patient.DiseaseType = patient.DiseaseType;
-                await this._createSearchEngineService.EngineMatching1(eng1, engine);
+                result = await this._createSearchEngineService.EngineMatching1Async(eng1, engine);
             }
 
             var eng2 = JsonConvert.DeserializeObject<EngineRequest2>(engine.Schema);
@@ -112,10 +113,10 @@ namespace SearchAndMatch.Api.Controllers
                 eng2.Patient.LastName = patient.LastName;
                 eng2.Patient.DateOfBirth = Convert.ToDateTime(patient.DateOfBirth).ToString("yyyy-MM-dd");
                 eng2.Patient.DiseaseType = patient.DiseaseType;
-                await this._createSearchEngineService.EngineMatching1(eng1, engine);
+                result = await _createSearchEngineService.EngineMatching2Async(eng2, engine);
             }
 
-            return patient;
+            return new OkObjectResult(result);
         }
     }
 }

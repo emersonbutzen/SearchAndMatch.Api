@@ -18,7 +18,7 @@ namespace SearchAndMatch.Application.Servives
             _logger = logger;
         }
 
-        public async Task EngineMatching1(EngineRequest1 engineRequest1, Engine engine)
+        public async Task<EndpointResponse> EngineMatching1Async(EngineRequest1 engineRequest1, Engine engine)
         {
             try
             {
@@ -29,14 +29,18 @@ namespace SearchAndMatch.Application.Servives
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync(engine.Endpoint, data);
                 response.EnsureSuccessStatusCode();
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<EndpointResponse>(responseContent);
+                return result;
             }
             catch (HttpRequestException exception)
             {
                 _logger.LogWarning("Post not accepted.", exception);
+                throw exception;
             }
         }
 
-        public async Task EngineMatching2(EngineRequest2 engineRequest2, Engine engine)
+        public async Task<EndpointResponse> EngineMatching2Async(EngineRequest2 engineRequest2, Engine engine)
         {
             try
             {
@@ -47,10 +51,14 @@ namespace SearchAndMatch.Application.Servives
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync(engine.Endpoint, data);
                 response.EnsureSuccessStatusCode();
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<EndpointResponse>(responseContent);
+                return result;
             }
             catch (HttpRequestException exception)
             {
                 _logger.LogWarning("Post not accepted.", exception);
+                throw exception;
             }
 
         }

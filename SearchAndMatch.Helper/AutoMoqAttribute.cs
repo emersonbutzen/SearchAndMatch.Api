@@ -1,10 +1,10 @@
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using Microsoft.EntityFrameworkCore;
 using SearchAndMatch.DAL.Context;
 
-namespace SearchAndMatch.DAL.Tests
+namespace SearchAndMatch.Helper
 {
     public class AutoMoqAttribute : AutoDataAttribute
     {
@@ -34,5 +34,5 @@ namespace SearchAndMatch.DAL.Tests
                 });
             }
         }
-    }    
+    }
 }

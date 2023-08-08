@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SearchAndMatch.DAL\SearchAndMatch.DAL.csproj" />
     <ProjectReference Include="..\SearchAndMatch.Domain\SearchAndMatch.Domain.csproj" />
+    <ProjectReference Include="..\SearchAndMatch.Helper\SearchAndMatch.Helper.csproj" />
   </ItemGroup>
 
 </Project>

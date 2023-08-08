@@ -3,6 +3,7 @@ using FluentAssertions;
 using SearchAndMatch.DAL.Context;
 using SearchAndMatch.DAL.Repositories;
 using SearchAndMatch.Domain.Entities;
+using SearchAndMatch.Helper;
 
 namespace SearchAndMatch.DAL.Tests.Repositories
 {

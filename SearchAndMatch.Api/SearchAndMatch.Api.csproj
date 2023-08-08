@@ -27,8 +27,4 @@
     <ProjectReference Include="..\SearchAndMatch.Domain\SearchAndMatch.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
 </Project>

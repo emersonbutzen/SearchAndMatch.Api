@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAndMatch.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAndMatch.Helper", "SearchAndMatch.Helper\SearchAndMatch.Helper.csproj", "{58530BF9-98E5-4A56-B26F-458072275F29}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAndMatch.Application.Tests", "SearchAndMatch.Application.Tests\SearchAndMatch.Application.Tests.csproj", "{C32F0674-2C8F-4E45-A2B5-1F08E07235BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{58530BF9-98E5-4A56-B26F-458072275F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58530BF9-98E5-4A56-B26F-458072275F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58530BF9-98E5-4A56-B26F-458072275F29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C32F0674-2C8F-4E45-A2B5-1F08E07235BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C32F0674-2C8F-4E45-A2B5-1F08E07235BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C32F0674-2C8F-4E45-A2B5-1F08E07235BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C32F0674-2C8F-4E45-A2B5-1F08E07235BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{082D4910-87C6-4BB1-A239-887A821DC8A0} = {32150FFF-F319-496E-961E-282CA89DD9D0}
 		{9147D839-16D7-414F-A980-231E0602BE4F} = {055C87D9-6B01-41DA-9946-BA6E60552F7B}
 		{58530BF9-98E5-4A56-B26F-458072275F29} = {32150FFF-F319-496E-961E-282CA89DD9D0}
+		{C32F0674-2C8F-4E45-A2B5-1F08E07235BD} = {055C87D9-6B01-41DA-9946-BA6E60552F7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83127825-56B7-4784-AC65-3072B88348E7}

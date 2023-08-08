@@ -1,4 +1,7 @@
+using System.Reflection;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using SearchAndMatch.Api.Exceptions;
 using SearchAndMatch.Application.Servives;
 using SearchAndMatch.DAL.Context;
 using SearchAndMatch.DAL.Repositories;
@@ -28,6 +31,9 @@ namespace SearchAndMatch.Api
             builder.Services.AddTransient<ICreateSearchEngineService, CreateSearchEngineService>();
             builder.Services.AddTransient<IPatientService, PatientService>();
 
+            // Add MediatR
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -47,6 +53,8 @@ namespace SearchAndMatch.Api
 
             app.UseAuthorization();
 
+            // Add exception middleware
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.MapControllers();
 

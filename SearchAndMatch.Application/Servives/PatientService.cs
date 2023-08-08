@@ -5,8 +5,8 @@ namespace SearchAndMatch.Application.Servives
 {
     public class PatientService : IPatientService
     {
-        private IPatientRepository _patientRepository;
-        private IEngineRepository _engineRepository;
+        private readonly IPatientRepository _patientRepository;
+        private readonly IEngineRepository _engineRepository;
         public PatientService(IPatientRepository patientRepository, IEngineRepository engineRepository)
         {
             _patientRepository = patientRepository;

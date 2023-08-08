@@ -1,6 +1,7 @@
-﻿using System.Globalization;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SearchAndMatch.Api.Commands;
 using SearchAndMatch.Application.DTOs;
 using SearchAndMatch.Application.Servives;
 using SearchAndMatch.Domain.Entities;
@@ -11,11 +12,13 @@ namespace SearchAndMatch.Api.Controllers
     [ApiController]
     public class PatientsController : ControllerBase
     {
+        private readonly IMediator _mediator;
         private readonly IPatientService _patientService;
         private readonly ICreateSearchEngineService _createSearchEngineService;
 
-        public PatientsController(IPatientService patientService, ICreateSearchEngineService createSearchEngineService)
+        public PatientsController(IMediator mediator, IPatientService patientService, ICreateSearchEngineService createSearchEngineService)
         {
+            _mediator = mediator;
             _patientService = patientService;
             _createSearchEngineService = createSearchEngineService;
         }
@@ -48,28 +51,14 @@ namespace SearchAndMatch.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Patient>> CreatePatient([FromBody] PatientCreateRequest patient)
         {
-            if (_patientService == null)
-            {
-                return Problem("Entity set 'PatientContext.Patients'  is null.");
-            }
-
             if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
             }
-            var formats = new string[] { "yyyy-MM-dd", "dd/MM/yyyy", "d/MM/yyyy", "yyyy/MM/dd" };
-            var isValidFormat = DateTime.TryParseExact(patient.DateOfBirth, formats, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime dateOfBith);
-            if (isValidFormat)
-            {
-                var newPatient = new Patient() { FirstName = patient.FirstName, LastName = patient.LastName, DateOfBirth = dateOfBith.Date.ToString(), DiseaseType = patient.DiseaseType };
-                await _patientService.AddPatient(newPatient);
 
-                return CreatedAtAction("GetPatient", new { id = newPatient.Id }, newPatient);
-            }
-            else
-            {
-                return BadRequest("Invalid date format, please use yyyy-MM-dd\", \"dd/MM/yyyy\", \"d/MM/yyyy\" or \"yyyy/MM/dd");
-            }
+            var result = await _mediator.Send(new AddPatientCommand(patient));
+
+            return CreatedAtAction("GetPatient", new { id = result.Id }, result);
         }
 
         [Route("CreateSearch")]
